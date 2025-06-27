@@ -8,22 +8,26 @@ sap.ui.define([
 
 	return Controller.extend("ui5.teste-pratico-brgaap.controller.ListaDeNotasFiscais", {
 		onInit: async function () {
+			await this._definirModeloDasNotasFiscais();
+		},
+
+		_definirModeloDasNotasFiscais: async function (){
 			const response = await fetch("https://jsonplaceholder.typicode.com/todos");
 			const data = await response.json();
 
-			this.getView().setModel(new JSONModel(data), "invoice");
+			return this.getView().setModel(new JSONModel(data), "notas");
 		},
 
-		onFilterNotasFiscaiss: function (oEvent) {
-			const aFilter = [];
-			const sQuery = oEvent.getParameter("query");
-			if (sQuery) {
-				aFilter.push(new Filter("title", FilterOperator.Contains, sQuery));
+		aoFiltrarNotasFiscais: function (evento) {
+			const filtro = [];
+			const query = evento.getParameter("query");
+			if (query) {
+				filtro.push(new Filter("title", FilterOperator.Contains, query));
 			}
 
-			const oList = this.byId("invoiceList");
-			const oBinding = oList.getBinding("items");
-			oBinding.filter(aFilter);
+			const tabela = this.byId("tabelaNotasFiscais");
+			const binding = tabela.getBinding("items");
+			binding.filter(filtro);
 		}
 	});
 });
