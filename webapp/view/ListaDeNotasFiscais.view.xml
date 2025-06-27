@@ -41,7 +41,7 @@
                         selected="{notas>completed}"
                         editable="false"
                     />
-                    <Button icon="sap-icon://show" />
+                    <Button icon="sap-icon://show" press="aoSelecionarItemNaTabela" />
                 </cells>
             </ColumnListItem>
         </items>

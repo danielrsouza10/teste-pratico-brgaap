@@ -11,7 +11,7 @@ sap.ui.define([
 			await this._definirModeloDasNotasFiscais();
 		},
 
-		_definirModeloDasNotasFiscais: async function (){
+		_definirModeloDasNotasFiscais: async function () {
 			const response = await fetch("https://jsonplaceholder.typicode.com/todos");
 			const data = await response.json();
 
@@ -28,6 +28,21 @@ sap.ui.define([
 			const tabela = this.byId("tabelaNotasFiscais");
 			const binding = tabela.getBinding("items");
 			binding.filter(filtro);
+		},
+
+		_obterIdSelecionadoNaLista: function (evento) {
+			return evento
+					.getSource()
+					.getBindingContext("notas")
+					.getObject().id;
+			
+		},
+
+		aoSelecionarItemNaTabela: function (evento) {
+			const idSelecionado = this._obterIdSelecionadoNaLista(evento);
+			const router = this.getOwnerComponent().getRouter();
+
+			return router.navTo("detalhesNotaFiscal", { id: idSelecionado });
 		}
 	});
 });
