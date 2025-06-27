@@ -1,0 +1,11 @@
+{
+  "name": "ui5.teste-pratico-brgaap",
+  "version": "1.0.0",
+  "description": "Teste Pratico SAPUI5 para BRGaap",
+  "scripts": {
+    "start": "ui5 serve -o index.html"
+  },
+  "devDependencies": {
+    "ui5-middleware-simpleproxy": "^3.4.2"
+  }
+}

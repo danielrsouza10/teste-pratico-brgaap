@@ -1,0 +1,4 @@
+<mvc:View controllerName="ui5.teste-pratico-brgaap.controller.AppHeader"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc">
+</mvc:View>

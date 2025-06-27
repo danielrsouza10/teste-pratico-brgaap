@@ -1,0 +1,29 @@
+<mvc:View controllerName="ui5.teste-pratico-brgaap.controller.ListaDeNotasFiscais"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc">
+   <List id="invoiceList" headerText="Lista de TODOs" class="sapUiResponsiveMargin" width="auto" items="{
+            path : 'invoice>/',
+            sorter : {
+                path : 'userId',
+                group : true
+            }
+         }">
+      <headerToolbar>
+         <Toolbar>
+            <Title text="{i18n>TituloListaNotasFiscais}"/>
+            <ToolbarSpacer/>
+            <SearchField width="50%" search=".onFilterNotasFiscaiss"/>
+         </Toolbar>
+      </headerToolbar>
+      <items>
+         <ObjectListItem
+            title="{invoice>title}"
+            number="ID: {invoice>id}">
+            <attributes>
+               <ObjectAttribute text="User ID: {invoice>userId}" />
+               <ObjectAttribute text="Completed: {= ${invoice>completed} ? 'Sim' : 'Não' }" />
+            </attributes>
+         </ObjectListItem>
+      </items>
+   </List>
+</mvc:View>
