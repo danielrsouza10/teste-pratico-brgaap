@@ -34,7 +34,7 @@
                 <ObjectStatus
                     title="{i18n>Completado}"
                     text="{= ${nota>/completed} ? 'Concluído' : 'Pendente' }"
-                    state="{= ${nota>/completed} ? 'Success' : 'Error' }"
+                    state="{= ${nota>/completed} ? 'Success' : 'Warning' }"
                 />
             </statuses>
         </ObjectHeader>
