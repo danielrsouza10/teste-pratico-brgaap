@@ -1,6 +1,7 @@
 <mvc:View
     controllerName="ui5.teste-pratico-brgaap.controller.ListaDeNotasFiscais"
     xmlns="sap.m"
+    xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
 >
     <Table
@@ -9,18 +10,43 @@
         enableBusyIndicator="true"
         alternateRowColors="true"
         growing="true"
+        growingThreshold="10"
         showSeparators="All"
         growingScrollToLoad="true"
     >
         <headerToolbar>
-            <Toolbar>
+            <OverflowToolbar >
                 <Title text="{i18n>TituloListaNotasFiscais}" />
                 <ToolbarSpacer />
                 <SearchField
+                    id="searchFieldPersonagens"
                     width="50%"
                     search=".aoFiltrarNotasFiscais"
                 />
-            </Toolbar>
+                <Button
+                    type="Transparent"
+                    text="{i18n>TituloBotaoReset}"
+                    press=".aoResetar"
+                    id="resetBtn"
+                    tooltip="Resetar filtros"
+                />
+                <OverflowToolbarButton
+                    id="organizarBtn"
+                    tooltip="Organizar em Ordem Alfabética"
+                    type="Transparent"
+                    text="Sort"
+                    icon="sap-icon://sort"
+                    press=".aoOrganizar"
+                />
+                <OverflowToolbarButton
+                    id="agruparBtn"
+                    tooltip="Agrupar por Id do Usuario"
+                    type="Transparent"
+                    text="Group"
+                    icon="sap-icon://group-2"
+                    press=".aoAgrupar"
+                />
+            </OverflowToolbar>
         </headerToolbar>
         <columns>
             <Column hAlign="Begin">

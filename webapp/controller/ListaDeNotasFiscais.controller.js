@@ -2,8 +2,9 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], (Controller, JSONModel, Filter, FilterOperator) => {
+	"sap/ui/model/FilterOperator",
+	"sap/ui/model/Sorter",
+], (Controller, JSONModel, Filter, FilterOperator, Sorter) => {
 	"use strict";
 
 	return Controller.extend("ui5.teste-pratico-brgaap.controller.ListaDeNotasFiscais", {
@@ -32,10 +33,10 @@ sap.ui.define([
 
 		_obterIdSelecionadoNaLista: function (evento) {
 			return evento
-					.getSource()
-					.getBindingContext("notas")
-					.getObject().id;
-			
+				.getSource()
+				.getBindingContext("notas")
+				.getObject().id;
+
 		},
 
 		aoSelecionarItemNaTabela: function (evento) {
@@ -43,6 +44,40 @@ sap.ui.define([
 			const router = this.getOwnerComponent().getRouter();
 
 			return router.navTo("detalhesNotaFiscal", { id: idSelecionado });
-		}
+		},
+
+		aoOrganizar: function () {
+			const idTabelaNotasFiscais = "tabelaNotasFiscais";
+			const propriedade = "items";
+			const propriedadeOrdenada = "title";
+			var lista = this.byId(idTabelaNotasFiscais);
+			var binding = lista.getBinding(propriedade);
+			var sorter = new Sorter(propriedadeOrdenada);
+			binding.sort(sorter);
+		},
+
+		aoAgrupar: function () {
+			const idTabelaNotasFiscais = "tabelaNotasFiscais";
+			const propriedade = "items";
+			const propriedadeOrdenada = "userId";
+			var lista = this.byId(idTabelaNotasFiscais);
+			var binding = lista.getBinding(propriedade);
+			var sorter = new Sorter(propriedadeOrdenada, false, function (contexto) {
+				var userId = contexto.getProperty(propriedadeOrdenada);
+				return {
+					key: userId,
+					text: userId,
+				};
+			});
+			binding.sort(sorter);
+		},
+
+		aoResetar: function () {
+			const stringVazia = "";
+			const idSearchField = "searchFieldPersonagens";
+			this.filtros = {};
+			this.byId(idSearchField).setValue(stringVazia);
+			this._definirModeloDasNotasFiscais();
+        },
 	});
 });
