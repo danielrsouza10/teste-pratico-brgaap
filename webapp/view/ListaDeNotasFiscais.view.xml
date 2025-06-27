@@ -19,7 +19,7 @@
                 <Title text="{i18n>TituloListaNotasFiscais}" />
                 <ToolbarSpacer />
                 <SearchField
-                    id="searchFieldPersonagens"
+                    id="searchFieldNotasFiscais"
                     width="50%"
                     search=".aoFiltrarNotasFiscais"
                 />

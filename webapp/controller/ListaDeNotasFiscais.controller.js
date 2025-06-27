@@ -74,8 +74,7 @@ sap.ui.define([
 
 		aoResetar: function () {
 			const stringVazia = "";
-			const idSearchField = "searchFieldPersonagens";
-			this.filtros = {};
+			const idSearchField = "searchFieldNotasFiscais";
 			this.byId(idSearchField).setValue(stringVazia);
 			this._definirModeloDasNotasFiscais();
         },
