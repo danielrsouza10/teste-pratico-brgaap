@@ -35,8 +35,8 @@
 		  "fallbackLocale": ""
 		}
 	  },
-      "invoice": {
-        "dataSource": "invoiceRemote"
+      "notas": {
+        "dataSource": "notasRemote"
       }
 	},
 	"rootView": {
