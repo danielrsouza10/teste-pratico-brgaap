@@ -16,6 +16,8 @@ sap.ui.define([
          const oData = {};
          const oModel = new JSONModel(oData);
          this.setModel(oModel);
+
+         this.getRouter().initialize();
       }
    });
 });
