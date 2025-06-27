@@ -1,7 +1,7 @@
 <mvc:View controllerName="ui5.teste-pratico-brgaap.controller.AppHeader"
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc">
-   <VBox class="sapUiSmallMargin">
-      <Image src="images/logo.png" alt="Logo da empresa" width="100px" />
+   <VBox>
+      <Image src="images/logo-brgaap.png" alt="Logo da empresa" width="300px" />
    </VBox>
 </mvc:View>

@@ -9,34 +9,38 @@
 >
     <Page
         id="paginaDetalhesRaca"
-        title="{i18n>DetalhesDaNotaFiscal}"
+        title="{i18n>homePageTitle}"
         showHeader="true"
         enableScrolling="true"
         showNavButton="true"
         navButtonPress=".onNavBack"
         class="sapUiResponsiveContentPadding"
     >
-        <ObjectHeader
-            id="objectHeader"
-            fullScreenOptimized="true"
-            intro="{i18n>Id}: {nota>/id}"
-            title="{nota>/title}"
-            titleActive="false"
-            backgroundDesign="Translucent"
-            class="sapUiResponsivePadding--header"
-			responsive="true"
-        >
-            <ObjectAttribute
-                title="{i18n>UserId}"
-                text="{nota>/userId}"
-            />
-            <statuses>
-                <ObjectStatus
-                    title="{i18n>Completado}"
-                    text="{= ${nota>/completed} ? 'Concluído' : 'Pendente' }"
-                    state="{= ${nota>/completed} ? 'Success' : 'Warning' }"
+        <content>
+            <mvc:XMLView viewName="ui5.teste-pratico-brgaap.view.AppHeader" />
+            <Title class="sapUiTinyMargin" text="{i18n>DetalhesDaNotaFiscal}" />
+            <ObjectHeader
+                id="objectHeader"
+                fullScreenOptimized="true"
+                intro="{i18n>Id}: {nota>/id}"
+                title="{nota>/title}"
+                titleActive="false"
+                backgroundDesign="Translucent"
+                class="sapUiResponsivePadding--header"
+                responsive="true"
+            >
+                <ObjectAttribute
+                    title="{i18n>UserId}"
+                    text="{nota>/userId}"
                 />
-            </statuses>
-        </ObjectHeader>
+                <statuses>
+                    <ObjectStatus
+                        title="{i18n>Completado}"
+                        text="{= ${nota>/completed} ? 'Concluído' : 'Pendente' }"
+                        state="{= ${nota>/completed} ? 'Success' : 'Warning' }"
+                    />
+                </statuses>
+            </ObjectHeader>
+        </content>
     </Page>
 </mvc:View>

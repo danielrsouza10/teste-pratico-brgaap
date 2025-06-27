@@ -13,6 +13,7 @@
         growingThreshold="10"
         showSeparators="All"
         growingScrollToLoad="true"
+        class="sapUiResponsiveContentPadding"
     >
         <headerToolbar>
             <OverflowToolbar >
