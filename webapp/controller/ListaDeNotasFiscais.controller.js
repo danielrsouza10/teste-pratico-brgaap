@@ -8,33 +8,39 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("ui5.teste-pratico-brgaap.controller.ListaDeNotasFiscais", {
+		
 		onInit: async function () {
 			await this._definirModeloDasNotasFiscais();
 		},
 
 		_definirModeloDasNotasFiscais: async function () {
 			const response = await fetch("https://jsonplaceholder.typicode.com/todos");
-			const data = await response.json();
+			const dados = await response.json();
+			const modeloNotasFiscais = "notas";
 
-			return this.getView().setModel(new JSONModel(data), "notas");
+			return this.getView().setModel(new JSONModel(dados), modeloNotasFiscais);
 		},
 
 		aoFiltrarNotasFiscais: function (evento) {
 			const filtro = [];
-			const query = evento.getParameter("query");
+			const parametro = "query";
+			const propriedade = "title";
+			const query = evento.getParameter(parametro);
 			if (query) {
-				filtro.push(new Filter("title", FilterOperator.Contains, query));
+				filtro.push(new Filter(propriedade, FilterOperator.Contains, query));
 			}
-
-			const tabela = this.byId("tabelaNotasFiscais");
-			const binding = tabela.getBinding("items");
+			const idTabelaNotas = "tabelaNotasFiscais";
+			const bindDaTabela = "items";
+			const tabela = this.byId(idTabelaNotas);
+			const binding = tabela.getBinding(bindDaTabela);
 			binding.filter(filtro);
 		},
 
 		_obterIdSelecionadoNaLista: function (evento) {
+			const modeloNotasFiscais = "notas";
 			return evento
 				.getSource()
-				.getBindingContext("notas")
+				.getBindingContext(modeloNotasFiscais)
 				.getObject().id;
 
 		},
@@ -42,8 +48,9 @@ sap.ui.define([
 		aoSelecionarItemNaTabela: function (evento) {
 			const idSelecionado = this._obterIdSelecionadoNaLista(evento);
 			const router = this.getOwnerComponent().getRouter();
+			const rotaViewDetalhes = "detalhesNotaFiscal";
 
-			return router.navTo("detalhesNotaFiscal", { id: idSelecionado });
+			return router.navTo(rotaViewDetalhes, { id: idSelecionado });
 		},
 
 		aoOrganizar: function () {
