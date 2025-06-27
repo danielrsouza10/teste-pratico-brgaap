@@ -1,16 +1,16 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], (Controller, JSONModel, Filter, FilterOperator) => {
+	"sap/ui/core/routing/History"
+], (Controller, JSONModel, History) => {
 	"use strict";
 
 	return Controller.extend("ui5.teste-pratico-brgaap.controller.DetalhesNotaFiscal", {
 		
         onInit() {
-			const oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("detalhesNotaFiscal").attachPatternMatched(this.aoCoincidirRota, this);
+			const router = this.getOwnerComponent().getRouter();
+			const rotaDetalhesNotaFiscal = "detalhesNotaFiscal";
+			router.getRoute(rotaDetalhesNotaFiscal).attachPatternMatched(this.aoCoincidirRota, this);
 		},
 
 		aoCoincidirRota(evento) {
@@ -20,38 +20,24 @@ sap.ui.define([
 
 		_definirModeloDaNotaFiscal: async function (id) {
             let uri = "https://jsonplaceholder.typicode.com/todos/" + id;
-            console.log(uri);
 			const response = await fetch(uri);
-			const data = await response.json();
+			const dados = await response.json();
+			const modeloNotaFiscal = "nota";
 
-			return this.getView().setModel(new JSONModel(data), "nota");
+			return this.getView().setModel(new JSONModel(dados), modeloNotaFiscal);
 		},
 
-		aoFiltrarNotasFiscais: function (evento) {
-			const filtro = [];
-			const query = evento.getParameter("query");
-			if (query) {
-				filtro.push(new Filter("title", FilterOperator.Contains, query));
+		onNavBack() {
+			const historico = History.getInstance();
+			const hashAnterior = historico.getPreviousHash();
+			const rotaPaginaPrincipal = "overview";
+
+			if (hashAnterior !== undefined) {
+				window.history.go(-1);
+			} else {
+				const router = this.getOwnerComponent().getRouter();
+				router.navTo(rotaPaginaPrincipal, {}, true);
 			}
-
-			const tabela = this.byId("tabelaNotasFiscais");
-			const binding = tabela.getBinding("items");
-			binding.filter(filtro);
 		},
-
-		_obterIdSelecionadoNaLista: function (evento) {
-			return evento
-					.getSource()
-					.getBindingContext("notas")
-					.getObject().id;
-			
-		},
-
-		aoSelecionarItemNaTabela: function (evento) {
-			const idSelecionado = this._obterIdSelecionadoNaLista(evento);
-			const router = this.getOwnerComponent().getRouter();
-
-			return router.navTo("detalhesNotaFiscal", { id: idSelecionado });
-		}
 	});
 });
